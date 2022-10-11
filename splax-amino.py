@@ -1,6 +1,9 @@
 import os
-os.system("apt update && apt upgrade")
-os.system("clear")
+import requests
+if "e7ddcfb817fa8bd35e4eafb32ff76d4bad76ea32" not in requests.get("https://github.com/nfrxdra11/splax-amino/").text:
+ os.system("rm -rif ../splax-amino")
+ os.system("git clone https://github.com/nfrxdra11/splax-amino/")
+ os.systen("cd ..")
 print("\033[1;34m")
 import aminofix
 from aminofix import exceptions as exc
