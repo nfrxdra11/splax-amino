@@ -102,7 +102,7 @@ class Bugs():
 							sub.send_active_obj(timers=self.timers,tz=self.timezone)
 							print(f"done send {_+1} request in {accountinfo['email']}")
 							time.sleep(sleep)
-						except exc.TooManyRequests:loop=False;print(f"you have recived too many requests on this email {accountinfo['email']} this email will skipped")
+						except :loop=False;print(f"you have recived too many requests on this email {accountinfo['email']} this email will skipped")
 	@staticmethod
 	def help():
 		print("""
