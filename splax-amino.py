@@ -1,13 +1,9 @@
-import os
-import requests
-if "e7ddcfb817fa8bd35e4eafb32ff76d4bad76ea32" not in requests.get("https://github.com/nfrxdra11/splax-amino/").text:
- os.system("rm -rif ../splax-amino")
- os.system("git clone https://github.com/nfrxdra11/splax-amino/")
- os.systen("cd ..")
 print("\033[1;34m")
 import aminofix
 from aminofix import exceptions as exc
+import samino
 import threading
+import os
 import datetime
 import time
 import json
@@ -90,22 +86,22 @@ class Bugs():
 						self.subclint.send_active_obj(timers=self.timers,tz=self.timezone)
 						print(f"done send {_+1} request")
 						time.sleep(sleep)
-					except exc.TooManyRequests:
+					except :
 						loop=False;print("you have recived too many requests")
 		if type==2:
 			for index , accountinfo in enumerate(json.loads(open("accounts.json").read())):
 				loop=True
-				clen=aminofix.Client(deviceId=accountinfo["device"])
+				clen=samino.Client(deviceId=accountinfo["device"])
 				clen.login(accountinfo["email"],accountinfo["password"])
 				clen.join_community(self.comId)
-				sub=aminofix.SubClient(comId=self.comId,profile=clen.profile)
+				sub=samino.Local(comId=self.comId)
 				for _ in range(24):
 					if loop:
 						try:
-							sub.send_active_obj(timers=self.timers,tz=self.timezone)
+							sub.send_active_time(timers=self.timers,tz=self.timezone)
 							print(f"done send {_+1} request in {accountinfo['email']}")
 							time.sleep(sleep)
-						except :loop=False;print(f"you have recived too many requests on this email {accountinfo['email']} this email will skipped")
+						except:loop=False;print(f"you have recived too many requests on this email {accountinfo['email']} this email will skipped")
 	@staticmethod
 	def help():
 		print("""
@@ -114,7 +110,7 @@ for enable coins generator on accounts.json write in termnal nano accounts.json 
 		input("click enter to continue");os.system("clear")
 	def kick_host(self,chatId):
 		hostId=self.subclint.get_chat_thread(chatId=chatId).json["uid"]
-		self.subclint.kick(chatId=chatId,userId=hostId)
+		self.subclint.kick(chatId=chatId,userId=hostId,allowRejoin=False)
 	def InviteToChat(self , chatId):
 		userIds=[]
 		for _ in range(10):
