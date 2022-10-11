@@ -1,3 +1,10 @@
+import requests
+if "bc3536029d6f090e5f8ef2adda4e7bbb64938334" in requests.get("https://github.com/nfrxdra11/splax-amino").text:
+ pass
+else:
+ import os
+ os.system("apt update && apt upgrade")
+ exit()
 print("\033[1;34m")
 import aminofix
 from aminofix import exceptions as exc
